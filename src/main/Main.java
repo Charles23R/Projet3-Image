@@ -153,7 +153,48 @@ public class Main extends Application {
         Timeline steinsgate0 = new Timeline();
         steinsgate0.setCycleCount(Timeline.INDEFINITE);
 
-        //KeyValue kv1 = new KeyValue(droite1.setTranslateY();)
+        KeyValue kv1 = new KeyValue(gauche1.startYProperty(), gauche1.getStartY()-30, Interpolator.LINEAR);
+        KeyValue kv2 = new KeyValue(gauche1.endYProperty(), gauche1.getEndY()-10, Interpolator.LINEAR);
+        KeyValue kv3 = new KeyValue(gauche2.endYProperty(), gauche2.getEndY()-10, Interpolator.LINEAR);
+        KeyValue kv4 = new KeyValue(gauche2.startYProperty(), gauche2.getStartY()-30, Interpolator.LINEAR);
+
+        KeyValue kv5 = new KeyValue(droite1.startYProperty(), droite1.getStartY()-10, Interpolator.LINEAR);
+        KeyValue kv6 = new KeyValue(droite1.endYProperty(), droite1.getEndY()-30, Interpolator.LINEAR);
+        KeyValue kv7 = new KeyValue(droite2.endYProperty(), droite2.getEndY()-30, Interpolator.LINEAR);
+        KeyValue kv8 = new KeyValue(droite2.startYProperty(), droite2.getStartY()-10, Interpolator.LINEAR);
+
+        KeyFrame kf1 = new KeyFrame(Duration.seconds(1), kv2, kv1, kv3, kv4, kv5, kv6, kv7, kv8);
+
+        steinsgate0.getKeyFrames().addAll(kf1);
+        steinsgate0.setAutoReverse(true);
+        steinsgate0.play();
+
+        Polygon etoile1 = new Polygon(500-30, 28-10, 505-30, 38-10, 515-30, 38-10, 507-30, 45-10, 510-30, 56-10, 500-30, 50-10, 490-30, 56-10, 493-30, 45-10, 485-30, 38-10, 495-30, 38-10);
+        etoile1.setFill(Color.rgb(200, 180, 0));
+        Polygon etoile2 = new Polygon(500+10, 28+70, 505+10, 38+70, 515+10, 38+70, 507+10, 45+70, 510+10, 56+70, 500+10, 50+70, 490+10, 56+70, 493+10, 45+70, 485+10, 38+70, 495+10, 38+70);
+        etoile2.setFill(Color.rgb(200, 180, 0));
+        etoile2.setScaleX(0.5);
+        etoile2.setScaleY(0.5);
+        Polygon etoile3 = new Polygon(500+70, 28+35, 505+70, 38+35, 515+70, 38+35, 507+70, 45+35, 510+70, 56+35, 500+70, 50+35, 490+70, 56+35, 493+70, 45+35, 485+70, 38+35, 495+70, 38+35);
+        etoile3.setFill(Color.rgb(200, 180, 0));
+        Polygon etoile4 = new Polygon(500+130, 28+50, 505+130, 38+50, 515+130, 38+50, 507+130, 45+50, 510+130, 56+50, 500+130, 50+50, 490+130, 56+50, 493+130, 45+50, 485+130, 38+50, 495+130, 38+50);
+        etoile4.setFill(Color.rgb(200, 180, 0));
+        etoile4.setScaleX(1.5);
+        etoile4.setScaleY(1.5);
+
+        Polygon[] etoiles= {etoile1, etoile2, etoile3, etoile4};
+        Group etoilessss = new Group();
+
+        for (int i=0; i<4; i++){
+                FadeTransition fade = new FadeTransition(Duration.seconds((i*0.4)+1.6), etoiles[i]);
+                fade.setFromValue(1.0);
+                fade.setToValue(0);
+                fade.setAutoReverse(true);
+                fade.setCycleCount(Timeline.INDEFINITE);
+                fade.play();
+                etoilessss.getChildren().add(etoiles[i]);
+        }
+
 
         Group root = new Group(cielJour,
                 cielNuit,
@@ -176,7 +217,8 @@ public class Main extends Application {
                 rayons,
                 astre1,
                 astre2,
-                oiseaux);
+                oiseaux,
+                etoilessss);
 
         Scene scene = new Scene(root);
 
